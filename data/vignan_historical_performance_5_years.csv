@@ -1,0 +1,76 @@
+academic_period,metric_key,metric_name,domain,numeric_value,unit,direction,source_name,source_type,quality_tier,confidence_score,as_of_date,notes
+2020-2021,academic.graduation.rate,Graduation Rate,ACADEMIC_PERFORMANCE,71.2,percent,HIGHER_IS_BETTER,Academic Registrar,MANUAL,VERIFIED,0.95,2021-06-30,Historical baseline post-pandemic cohort
+2021-2022,academic.graduation.rate,Graduation Rate,ACADEMIC_PERFORMANCE,73.0,percent,HIGHER_IS_BETTER,Academic Registrar,MANUAL,VERIFIED,0.95,2022-06-30,Digital tutoring intervention implemented
+2022-2023,academic.graduation.rate,Graduation Rate,ACADEMIC_PERFORMANCE,74.8,percent,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.95,2023-06-30,Curriculum flexibility and remediation
+2023-2024,academic.graduation.rate,Graduation Rate,ACADEMIC_PERFORMANCE,77.1,percent,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.96,2024-06-30,Academic mentoring system scaled
+2024-2025,academic.graduation.rate,Graduation Rate,ACADEMIC_PERFORMANCE,80.4,percent,HIGHER_IS_BETTER,Office of Institutional Research,MANUAL,VERIFIED,0.98,2025-06-30,Target surpassed; 5-year high
+2020-2021,academic.dropout.rate,Dropout Rate,ACADEMIC_PERFORMANCE,11.5,percent,LOWER_IS_BETTER,Dean of Student Welfare,MANUAL,VERIFIED,0.92,2021-06-30,Elevated due to remote transition challenges
+2021-2022,academic.dropout.rate,Dropout Rate,ACADEMIC_PERFORMANCE,10.2,percent,LOWER_IS_BETTER,Dean of Student Welfare,MANUAL,VERIFIED,0.93,2022-06-30,Early warning alert system rolled out
+2022-2023,academic.dropout.rate,Dropout Rate,ACADEMIC_PERFORMANCE,9.1,percent,LOWER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.94,2023-06-30,Financial aid retention bridge support
+2023-2024,academic.dropout.rate,Dropout Rate,ACADEMIC_PERFORMANCE,8.0,percent,LOWER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.95,2024-06-30,Continuous reduction in year-1 attrition
+2024-2025,academic.dropout.rate,Dropout Rate,ACADEMIC_PERFORMANCE,6.8,percent,LOWER_IS_BETTER,Dean of Student Welfare,MANUAL,VERIFIED,0.96,2025-06-30,Historical lowest withdrawal rate
+2020-2021,placement.rate,Placement Rate,PLACEMENT_EMPLOYER_DEMAND,68.5,percent,HIGHER_IS_BETTER,Corporate Relations & Placement,MANUAL,VERIFIED,0.94,2021-07-31,COVID IT slowdown hiring dip
+2021-2022,placement.rate,Placement Rate,PLACEMENT_EMPLOYER_DEMAND,71.0,percent,HIGHER_IS_BETTER,Corporate Relations & Placement,MANUAL,VERIFIED,0.95,2022-07-31,Mass hiring recovery in tech sector
+2022-2023,placement.rate,Placement Rate,PLACEMENT_EMPLOYER_DEMAND,74.5,percent,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.96,2023-07-31,Diversified to BFSI and core engineering
+2023-2024,placement.rate,Placement Rate,PLACEMENT_EMPLOYER_DEMAND,76.2,percent,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.96,2024-07-31,Tech recruiter hiring standards elevated
+2024-2025,placement.rate,Placement Rate,PLACEMENT_EMPLOYER_DEMAND,83.0,percent,HIGHER_IS_BETTER,Corporate Relations & Placement,MANUAL,VERIFIED,0.97,2025-07-31,AI skill specialization partnerships
+2020-2021,placement.median.salary,Median Starting Salary,PLACEMENT_EMPLOYER_DEMAND,52.0,usd_thousands,HIGHER_IS_BETTER,Corporate Relations & Placement,MANUAL,VERIFIED,0.90,2021-07-31,Calibrated to 5.2 LPA standard baseline
+2021-2022,placement.median.salary,Median Starting Salary,PLACEMENT_EMPLOYER_DEMAND,56.5,usd_thousands,HIGHER_IS_BETTER,Corporate Relations & Placement,MANUAL,VERIFIED,0.91,2022-07-31,Wage recovery in software roles
+2022-2023,placement.median.salary,Median Starting Salary,PLACEMENT_EMPLOYER_DEMAND,61.0,usd_thousands,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.93,2023-07-31,Product engineering offers added
+2023-2024,placement.median.salary,Median Starting Salary,PLACEMENT_EMPLOYER_DEMAND,67.5,usd_thousands,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.94,2024-07-31,Specialized data science tier compensation
+2024-2025,placement.median.salary,Median Starting Salary,PLACEMENT_EMPLOYER_DEMAND,74.2,usd_thousands,HIGHER_IS_BETTER,Corporate Relations & Placement,MANUAL,VERIFIED,0.96,2025-07-31,Top tier packages reaching 7.42 LPA median
+2020-2021,employer.demand.index,Employer Demand Index,PLACEMENT_EMPLOYER_DEMAND,72.0,index,HIGHER_IS_BETTER,Market Intelligence Agent,AGENT,ESTIMATED,0.85,2021-06-30,Regional hiring index baseline
+2021-2022,employer.demand.index,Employer Demand Index,PLACEMENT_EMPLOYER_DEMAND,76.4,index,HIGHER_IS_BETTER,Market Intelligence Agent,AGENT,ESTIMATED,0.87,2022-06-30,Surge in Hyderabad and Amaravati demand
+2022-2023,employer.demand.index,Employer Demand Index,PLACEMENT_EMPLOYER_DEMAND,81.0,index,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.90,2023-06-30,Semi-conductor and cloud hiring requests
+2023-2024,employer.demand.index,Employer Demand Index,PLACEMENT_EMPLOYER_DEMAND,85.5,index,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.92,2024-06-30,Tech employer demand remains resilient
+2024-2025,employer.demand.index,Employer Demand Index,PLACEMENT_EMPLOYER_DEMAND,91.2,index,HIGHER_IS_BETTER,Market Intelligence Agent,AGENT,VERIFIED,0.94,2025-06-30,Expansion of regional software tech parks
+2020-2021,admissions.yield,Admissions Yield,ADMISSIONS_MARKET,46.5,percent,HIGHER_IS_BETTER,Directorate of Admissions,MANUAL,VERIFIED,0.94,2021-08-31,Strong local preference during pandemic
+2021-2022,admissions.yield,Admissions Yield,ADMISSIONS_MARKET,43.8,percent,HIGHER_IS_BETTER,Directorate of Admissions,MANUAL,VERIFIED,0.94,2022-08-31,Interstate mobility resumed
+2022-2023,admissions.yield,Admissions Yield,ADMISSIONS_MARKET,40.2,percent,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.93,2023-08-31,Competitor private university tuition discounts
+2023-2024,admissions.yield,Admissions Yield,ADMISSIONS_MARKET,37.5,percent,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.92,2024-08-31,Sustained contraction in yield rate
+2024-2025,admissions.yield,Admissions Yield,ADMISSIONS_MARKET,35.1,percent,HIGHER_IS_BETTER,Directorate of Admissions,MANUAL,VERIFIED,0.95,2025-08-31,Requires targeted scholarship & recruitment push
+2020-2021,admissions.selectivity,Admissions Acceptance Rate,ADMISSIONS_MARKET,36.0,percent,LOWER_IS_BETTER,Directorate of Admissions,MANUAL,VERIFIED,0.93,2021-08-31,Broader intake to stabilize enrollments
+2021-2022,admissions.selectivity,Admissions Acceptance Rate,ADMISSIONS_MARKET,33.5,percent,LOWER_IS_BETTER,Directorate of Admissions,MANUAL,VERIFIED,0.94,2022-08-31,Eligibility cutoff scores raised
+2022-2023,admissions.selectivity,Admissions Acceptance Rate,ADMISSIONS_MARKET,31.0,percent,LOWER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.94,2023-08-31,Entrance examination ranking criteria tightened
+2023-2024,admissions.selectivity,Admissions Acceptance Rate,ADMISSIONS_MARKET,28.2,percent,LOWER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.95,2024-08-31,Increased applicant pool across states
+2024-2025,admissions.selectivity,Admissions Acceptance Rate,ADMISSIONS_MARKET,25.4,percent,LOWER_IS_BETTER,Directorate of Admissions,MANUAL,VERIFIED,0.96,2025-08-31,Most selective admission cycle in 5 years
+2020-2021,research.publications,Peer-Reviewed Publications,RESEARCH_PRODUCTIVITY,110.0,count,HIGHER_IS_BETTER,Dean of R&D,MANUAL,VERIFIED,0.92,2021-06-30,Scopus and Web of Science indexed
+2021-2022,research.publications,Peer-Reviewed Publications,RESEARCH_PRODUCTIVITY,135.0,count,HIGHER_IS_BETTER,Dean of R&D,MANUAL,VERIFIED,0.93,2022-06-30,Publication incentive policy initiated
+2022-2023,research.publications,Peer-Reviewed Publications,RESEARCH_PRODUCTIVITY,168.0,count,HIGHER_IS_BETTER,Agent 20 (Simulation),AGENT,VERIFIED,0.95,2023-06-30,Interdisciplinary lab output expanded
+2023-2024,research.publications,Peer-Reviewed Publications,RESEARCH_PRODUCTIVITY,215.0,count,HIGHER_IS_BETTER,Agent 20 (Simulation),AGENT,VERIFIED,0.96,2024-06-30,Q1 journal ratio increased to 42%
+2024-2025,research.publications,Peer-Reviewed Publications,RESEARCH_PRODUCTIVITY,280.0,count,HIGHER_IS_BETTER,Dean of R&D,MANUAL,VERIFIED,0.98,2025-06-30,Historic publication high; 2.5x growth
+2020-2021,research.citations,Research Citations,RESEARCH_PRODUCTIVITY,650.0,count,HIGHER_IS_BETTER,Dean of R&D,MANUAL,VERIFIED,0.91,2021-06-30,Cumulative 5-year rolling citation base
+2021-2022,research.citations,Research Citations,RESEARCH_PRODUCTIVITY,890.0,count,HIGHER_IS_BETTER,Dean of R&D,MANUAL,VERIFIED,0.92,2022-06-30,Growing international co-authorship impact
+2022-2023,research.citations,Research Citations,RESEARCH_PRODUCTIVITY,1240.0,count,HIGHER_IS_BETTER,Agent 20 (Simulation),AGENT,VERIFIED,0.94,2023-06-30,High impact articles cited in biotechnology and ML
+2023-2024,research.citations,Research Citations,RESEARCH_PRODUCTIVITY,1780.0,count,HIGHER_IS_BETTER,Agent 20 (Simulation),AGENT,VERIFIED,0.95,2024-06-30,Cross-departmental citation acceleration
+2024-2025,research.citations,Research Citations,RESEARCH_PRODUCTIVITY,2450.0,count,HIGHER_IS_BETTER,Dean of R&D,MANUAL,VERIFIED,0.97,2025-06-30,Citation acceleration; h-index improved
+2020-2021,research.grant.funding,Sponsored Research Funding,RESEARCH_PRODUCTIVITY,1800.0,usd_thousands,HIGHER_IS_BETTER,Office of Sponsored Research,MANUAL,VERIFIED,0.94,2021-03-31,Government DST and AICTE grants
+2021-2022,research.grant.funding,Sponsored Research Funding,RESEARCH_PRODUCTIVITY,2300.0,usd_thousands,HIGHER_IS_BETTER,Office of Sponsored Research,MANUAL,VERIFIED,0.95,2022-03-31,Defense and renewable energy funded projects
+2022-2023,research.grant.funding,Sponsored Research Funding,RESEARCH_PRODUCTIVITY,2950.0,usd_thousands,HIGHER_IS_BETTER,Agent 20 (Simulation),AGENT,VERIFIED,0.96,2023-03-31,Industrial consultancy contracts added
+2023-2024,research.grant.funding,Sponsored Research Funding,RESEARCH_PRODUCTIVITY,3800.0,usd_thousands,HIGHER_IS_BETTER,Agent 20 (Simulation),AGENT,VERIFIED,0.96,2024-03-31,Multi-year national research initiative grant
+2024-2025,research.grant.funding,Sponsored Research Funding,RESEARCH_PRODUCTIVITY,4900.0,usd_thousands,HIGHER_IS_BETTER,Office of Sponsored Research,MANUAL,VERIFIED,0.98,2025-03-31,Record extramural funding achievement
+2020-2021,faculty.phd.ratio,Faculty PhD Ratio,FACULTY_CAPABILITY,58.0,percent,HIGHER_IS_BETTER,Faculty Affairs Office,MANUAL,VERIFIED,0.93,2021-06-30,Doctoral qualification policy introduced
+2021-2022,faculty.phd.ratio,Faculty PhD Ratio,FACULTY_CAPABILITY,63.5,percent,HIGHER_IS_BETTER,Faculty Affairs Office,MANUAL,VERIFIED,0.94,2022-06-30,Internal faculty doctoral completions
+2022-2023,faculty.phd.ratio,Faculty PhD Ratio,FACULTY_CAPABILITY,69.0,percent,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.94,2023-06-30,Aggressive lateral hiring of PhDs from IITs/NITs
+2023-2024,faculty.phd.ratio,Faculty PhD Ratio,FACULTY_CAPABILITY,73.2,percent,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.95,2024-06-30,Mandatory PhD qualification for assistant professors
+2024-2025,faculty.phd.ratio,Faculty PhD Ratio,FACULTY_CAPABILITY,78.5,percent,HIGHER_IS_BETTER,Faculty Affairs Office,MANUAL,VERIFIED,0.97,2025-06-30,National ranking criteria standard met
+2020-2021,faculty.student.ratio,Student-Faculty Ratio,FACULTY_CAPABILITY,19.2,ratio,LOWER_IS_BETTER,Academic Registrar,MANUAL,VERIFIED,0.92,2021-06-30,Pandemic hiring freeze baseline
+2021-2022,faculty.student.ratio,Student-Faculty Ratio,FACULTY_CAPABILITY,18.1,ratio,LOWER_IS_BETTER,Academic Registrar,MANUAL,VERIFIED,0.93,2022-06-30,Recruitment drive across technical schools
+2022-2023,faculty.student.ratio,Student-Faculty Ratio,FACULTY_CAPABILITY,17.2,ratio,LOWER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.94,2023-06-30,Teaching assistant program expansion
+2023-2024,faculty.student.ratio,Student-Faculty Ratio,FACULTY_CAPABILITY,16.5,ratio,LOWER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.95,2024-06-30,Classroom size rationalization
+2024-2025,faculty.student.ratio,Student-Faculty Ratio,FACULTY_CAPABILITY,15.4,ratio,LOWER_IS_BETTER,Academic Registrar,MANUAL,VERIFIED,0.96,2025-06-30,Approaching NAAC benchmark of 15:1
+2020-2021,infra.lab.utilization,Engineering Lab Utilization Rate,INFRASTRUCTURE,64.0,percent,HIGHER_IS_BETTER,Estate & Laboratory Office,MANUAL,VERIFIED,0.90,2021-06-30,Staggered lab sessions post lockdown
+2021-2022,infra.lab.utilization,Engineering Lab Utilization Rate,INFRASTRUCTURE,70.5,percent,HIGHER_IS_BETTER,Estate & Laboratory Office,MANUAL,VERIFIED,0.92,2022-06-30,Full physical lab schedule restored
+2022-2023,infra.lab.utilization,Engineering Lab Utilization Rate,INFRASTRUCTURE,76.0,percent,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.93,2023-06-30,Evening shared research lab slots introduced
+2023-2024,infra.lab.utilization,Engineering Lab Utilization Rate,INFRASTRUCTURE,82.5,percent,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.94,2024-06-30,High throughput project laboratory operation
+2024-2025,infra.lab.utilization,Engineering Lab Utilization Rate,INFRASTRUCTURE,89.0,percent,HIGHER_IS_BETTER,Estate & Laboratory Office,MANUAL,VERIFIED,0.96,2025-06-30,Optimal facility capacity utilization
+2020-2021,infra.smart.classrooms,Smart Classroom Penetration,INFRASTRUCTURE,32.0,percent,HIGHER_IS_BETTER,IT & Infrastructure Services,MANUAL,VERIFIED,0.95,2021-06-30,Phase 1 campus digitization initiative
+2021-2022,infra.smart.classrooms,Smart Classroom Penetration,INFRASTRUCTURE,45.0,percent,HIGHER_IS_BETTER,IT & Infrastructure Services,MANUAL,VERIFIED,0.95,2022-06-30,Phase 2 AV hardware expansion in engineering
+2022-2023,infra.smart.classrooms,Smart Classroom Penetration,INFRASTRUCTURE,58.0,percent,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.95,2023-06-30,Hybrid learning podiums deployed in 4 blocks
+2023-2024,infra.smart.classrooms,Smart Classroom Penetration,INFRASTRUCTURE,72.0,percent,HIGHER_IS_BETTER,Agent 71 (Simulation),AGENT,VERIFIED,0.96,2024-06-30,Interactive displays and recording setups added
+2024-2025,infra.smart.classrooms,Smart Classroom Penetration,INFRASTRUCTURE,85.0,percent,HIGHER_IS_BETTER,IT & Infrastructure Services,MANUAL,VERIFIED,0.97,2025-06-30,Campus-wide digital smart infrastructure target met
+2020-2021,finance.operating.margin,Institutional Operating Margin,FINANCE_RESOURCES,12.4,percent,HIGHER_IS_BETTER,Finance & Accounts Department,MANUAL,VERIFIED,0.95,2021-03-31,Audited financial annual report
+2021-2022,finance.operating.margin,Institutional Operating Margin,FINANCE_RESOURCES,14.2,percent,HIGHER_IS_BETTER,Finance & Accounts Department,MANUAL,VERIFIED,0.95,2022-03-31,Cost discipline during recovery year
+2022-2023,finance.operating.margin,Institutional Operating Margin,FINANCE_RESOURCES,15.8,percent,HIGHER_IS_BETTER,Finance & Accounts Department,MANUAL,VERIFIED,0.96,2023-03-31,Surplus reinvested into research laboratories
+2023-2024,finance.operating.margin,Institutional Operating Margin,FINANCE_RESOURCES,17.1,percent,HIGHER_IS_BETTER,Finance & Accounts Department,MANUAL,VERIFIED,0.96,2024-03-31,Tuition revenue growth with stable overheads
+2024-2025,finance.operating.margin,Institutional Operating Margin,FINANCE_RESOURCES,18.5,percent,HIGHER_IS_BETTER,Finance & Accounts Department,MANUAL,VERIFIED,0.97,2025-03-31,Strong financial health sustaining capital initiatives

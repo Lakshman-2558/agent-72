@@ -1,0 +1,26 @@
+academic_period,department,intake_capacity,actual_admitted,pass_percentage,average_backlogs_per_student,average_attendance_percentage,placement_percentage,median_salary_lpa,publications_count,research_grants_lakhs
+2020-2021,Computer Science & Engineering,420,418,88.5,0.32,86.4,82.4,5.8,42,45.0
+2021-2022,Computer Science & Engineering,480,480,89.1,0.28,85.8,85.6,6.4,55,62.0
+2022-2023,Computer Science & Engineering,540,538,87.5,0.38,84.4,87.0,7.1,68,78.5
+2023-2024,Computer Science & Engineering,600,595,85.3,0.45,83.5,88.2,7.8,88,110.0
+2024-2025,Computer Science & Engineering,660,658,91.2,0.22,87.8,92.5,8.9,120,155.0
+2020-2021,Electronics & Communication Engineering,300,285,82.4,0.48,82.1,74.5,4.8,24,28.0
+2021-2022,Electronics & Communication Engineering,300,290,84.2,0.42,83.0,77.2,5.2,32,35.0
+2022-2023,Electronics & Communication Engineering,300,294,86.0,0.36,81.6,80.1,5.8,40,48.0
+2023-2024,Electronics & Communication Engineering,360,345,88.4,0.30,83.8,82.8,6.5,52,65.0
+2024-2025,Electronics & Communication Engineering,360,352,89.8,0.24,85.2,86.0,7.2,68,82.0
+2020-2021,Mechanical Engineering,240,210,79.5,0.62,80.5,62.0,4.2,18,35.0
+2021-2022,Mechanical Engineering,240,205,81.2,0.55,81.2,65.8,4.5,22,42.0
+2022-2023,Mechanical Engineering,180,172,83.0,0.48,82.0,69.5,4.9,28,55.0
+2023-2024,Mechanical Engineering,180,168,85.6,0.40,84.1,73.0,5.4,36,70.0
+2024-2025,Mechanical Engineering,180,170,87.8,0.32,86.0,77.5,6.0,45,88.0
+2020-2021,Biotechnology,120,115,86.2,0.35,84.0,68.0,4.5,20,50.0
+2021-2022,Biotechnology,120,118,88.0,0.30,85.2,71.5,5.0,28,68.0
+2022-2023,Biotechnology,120,120,89.8,0.26,86.0,75.0,5.6,35,85.0
+2023-2024,Biotechnology,120,119,92.1,0.20,87.4,79.2,6.2,46,115.0
+2024-2025,Biotechnology,120,120,94.5,0.15,89.1,84.0,7.0,58,150.0
+2020-2021,Management Studies (MBA),180,180,91.0,0.18,88.5,78.5,5.5,12,10.0
+2021-2022,Management Studies (MBA),180,180,92.5,0.15,89.2,81.0,6.0,16,14.0
+2022-2023,Management Studies (MBA),240,238,93.0,0.14,90.0,84.2,6.8,22,20.0
+2023-2024,Management Studies (MBA),240,240,94.2,0.12,90.8,87.5,7.5,28,26.0
+2024-2025,Management Studies (MBA),240,240,95.8,0.10,91.5,90.2,8.4,36,35.0
