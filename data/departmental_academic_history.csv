@@ -1,0 +1,26 @@
+Year,Department,Pass_Percentage,Average_Backlogs_Per_Student,Average_Attendance_Percentage
+2022,Computer Science,87.49,0.38,84.41
+2023,Computer Science,85.24,0.52,82.86
+2024,Computer Science,85.3,0.8,85.27
+2025,Computer Science,85.41,0.56,81.18
+2026,Computer Science,88.88,0.74,75.6
+2022,Mechanical Engineering,92.77,0.17,79.88
+2023,Mechanical Engineering,91.91,0.35,75.15
+2024,Mechanical Engineering,95.27,0.29,86.7
+2025,Mechanical Engineering,79.98,0.36,89.17
+2026,Mechanical Engineering,85.6,0.61,85.23
+2022,Electronics,95.5,0.77,83.73
+2023,Electronics,89.49,0.48,78.29
+2024,Electronics,81.97,0.5,81.57
+2025,Electronics,91.92,0.36,90.79
+2026,Electronics,87.55,0.14,81.55
+2022,Biotechnology,91.7,0.19,76.71
+2023,Biotechnology,89.88,0.49,76.55
+2024,Biotechnology,78.85,0.46,79.71
+2025,Biotechnology,82.89,0.19,77.84
+2026,Biotechnology,95.86,0.4,81.23
+2022,Business Administration,87.86,0.18,88.63
+2023,Business Administration,81.18,0.22,91.73
+2024,Business Administration,82.17,0.44,89.19
+2025,Business Administration,91.46,0.46,79.35
+2026,Business Administration,91.14,0.19,90.74
