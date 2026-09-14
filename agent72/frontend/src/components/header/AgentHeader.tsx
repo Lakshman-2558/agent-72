@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, ChevronDown, Building2, Calendar, Radio, Sparkles } from 'lucide-react';
+import { Building2, Calendar, Radio, RotateCcw, Shield } from 'lucide-react';
 import { Institution } from '../../api/types';
 
 interface AgentHeaderProps {
@@ -9,7 +9,7 @@ interface AgentHeaderProps {
   selectedPeriod: string;
   onSelectPeriod: (period: string) => void;
   isConnected: boolean;
-  onNavigateTab?: (tab: string) => void;
+  onRefresh?: () => void;
 }
 
 export const AgentHeader: React.FC<AgentHeaderProps> = ({
@@ -19,82 +19,81 @@ export const AgentHeader: React.FC<AgentHeaderProps> = ({
   selectedPeriod,
   onSelectPeriod,
   isConnected,
-  onNavigateTab,
+  onRefresh,
 }) => {
-  const periods = ['2024-2025', '2026-2027', '2023-2024', '2022-2023'];
+  const periods = ['2024-2025', '2025-2026', '2026-2027', '2023-2024'];
 
   return (
-    <header className="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200/90 shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+    <header className="sticky top-0 z-30 bg-white border-b border-[#D7E4EE] shadow-2xs">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Left: Branding */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white shadow-sm ring-2 ring-blue-600/20">
-            <span className="font-bold text-base tracking-wider">72</span>
+          <div className="w-10 h-10 rounded-xl bg-[#163A63] flex items-center justify-center text-white shadow-xs">
+            <span className="font-extrabold text-sm tracking-wider">72</span>
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-slate-900 tracking-tight text-base">AGENT 72</span>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 uppercase tracking-wider">
-                Institutional AI
+              <span className="font-extrabold text-[#163A63] tracking-tight text-base">Agent 72</span>
+              <span className="text-[10.5px] font-bold px-2 py-0.5 rounded bg-[#E8F4FB] text-[#163A63] border border-[#D7E4EE]">
+                DECISION SUPPORT
               </span>
             </div>
-            <p className="text-[11px] font-medium text-slate-500 uppercase tracking-wider">
+            <p className="text-[11px] font-semibold text-[#6B7F91]">
               Strategic Planning Agent
             </p>
           </div>
         </div>
 
-        {/* Right: Controls & Badges */}
-        <div className="flex items-center gap-3">
+        {/* Right: Institutional Context & Controls */}
+        <div className="flex items-center gap-2.5">
           {/* Institution Selector */}
-          <div className="relative inline-block">
-            <div className="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200/90 rounded-lg px-2.5 py-1.5 text-xs text-slate-700 transition-colors shadow-xs">
-              <Building2 className="w-3.5 h-3.5 text-slate-500" />
-              <select
-                value={selectedInstitutionId}
-                onChange={(e) => onSelectInstitution(e.target.value)}
-                className="bg-transparent font-medium text-slate-800 pr-5 focus:outline-none cursor-pointer appearance-none"
-              >
-                {institutions.map((inst) => (
-                  <option key={inst.id} value={inst.id}>
-                    {inst.name} ({inst.code})
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="w-3 h-3 text-slate-400 absolute right-2 pointer-events-none" />
-            </div>
+          <div className="relative inline-flex items-center gap-1.5 bg-[#F5F9FC] hover:bg-white border border-[#D7E4EE] rounded-lg px-2.5 py-1.5 text-xs text-[#19324A] transition-colors shadow-2xs">
+            <Building2 className="w-3.5 h-3.5 text-[#2F6EA6]" />
+            <select
+              value={selectedInstitutionId}
+              onChange={(e) => onSelectInstitution(e.target.value)}
+              className="bg-transparent font-semibold text-[#19324A] focus:outline-none cursor-pointer pr-1"
+            >
+              {institutions.map((inst) => (
+                <option key={inst.id} value={inst.id}>
+                  {inst.name} ({inst.code})
+                </option>
+              ))}
+            </select>
           </div>
 
-          {/* Analysis Period Selector */}
-          <div className="relative inline-block">
-            <div className="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200/90 rounded-lg px-2.5 py-1.5 text-xs text-slate-700 transition-colors shadow-xs">
-              <Calendar className="w-3.5 h-3.5 text-slate-500" />
-              <select
-                value={selectedPeriod}
-                onChange={(e) => onSelectPeriod(e.target.value)}
-                className="bg-transparent font-medium text-slate-800 pr-5 focus:outline-none cursor-pointer appearance-none"
-              >
-                {periods.map((p) => (
-                  <option key={p} value={p}>
-                    FY {p}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown className="w-3 h-3 text-slate-400 absolute right-2 pointer-events-none" />
-            </div>
+          {/* Academic Period Selector */}
+          <div className="relative inline-flex items-center gap-1.5 bg-[#F5F9FC] hover:bg-white border border-[#D7E4EE] rounded-lg px-2.5 py-1.5 text-xs text-[#19324A] transition-colors shadow-2xs">
+            <Calendar className="w-3.5 h-3.5 text-[#2F6EA6]" />
+            <select
+              value={selectedPeriod}
+              onChange={(e) => onSelectPeriod(e.target.value)}
+              className="bg-transparent font-semibold text-[#19324A] focus:outline-none cursor-pointer pr-1"
+            >
+              {periods.map((p) => (
+                <option key={p} value={p}>
+                  FY {p}
+                </option>
+              ))}
+            </select>
           </div>
 
-          {/* Leadership View Badge */}
-          <div className="hidden sm:flex items-center gap-1.5 bg-indigo-50 border border-indigo-200/70 text-indigo-700 text-xs font-semibold px-2.5 py-1.5 rounded-lg shadow-xs">
-            <Shield className="w-3.5 h-3.5 text-indigo-600" />
-            <span>Leadership View</span>
-          </div>
+          {/* Refresh Action */}
+          {onRefresh && (
+            <button
+              onClick={onRefresh}
+              className="p-1.5 rounded-lg border border-[#D7E4EE] bg-[#F5F9FC] hover:bg-white text-[#6B7F91] hover:text-[#163A63] transition shadow-2xs"
+              title="Refresh analytical snapshots"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+            </button>
+          )}
 
           {/* Live Status Indicator */}
-          <div className="flex items-center gap-1.5 text-[11px] font-medium px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white">
-            <Radio className={`w-3 h-3 ${isConnected ? 'text-emerald-500 animate-pulse' : 'text-slate-400'}`} />
-            <span className={isConnected ? 'text-slate-700' : 'text-slate-400'}>
-              {isConnected ? 'Live' : 'Connecting'}
+          <div className="flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1.5 rounded-lg border border-[#D7E4EE] bg-[#F5F9FC]">
+            <Radio className={`w-3 h-3 ${isConnected ? 'text-[#16805C]' : 'text-[#6B7F91]'}`} />
+            <span className={isConnected ? 'text-[#16805C]' : 'text-[#6B7F91]'}>
+              {isConnected ? 'API Online' : 'Connecting'}
             </span>
           </div>
         </div>
@@ -102,3 +101,4 @@ export const AgentHeader: React.FC<AgentHeaderProps> = ({
     </header>
   );
 };
+

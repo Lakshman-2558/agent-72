@@ -38,6 +38,7 @@ export interface CurrentPositionAnalysis {
   title: string;
   overall_confidence: number;
   metric_assessments: MetricAssessment[];
+  key_metrics?: MetricAssessment[];
   strengths: any[];
   gaps: any[];
   opportunities: any[];
@@ -65,6 +66,7 @@ export interface TrajectoryAnalysis {
   title: string;
   overall_confidence: number;
   metric_trajectories: MetricTrajectory[];
+  metric_trends?: MetricTrajectory[];
   created_at: string;
 }
 
@@ -120,6 +122,9 @@ export interface StrategicIntelligenceAnalysis {
   constraints: StrategicConstraint[];
   opportunities: StrategicOpportunity[];
   external_factors: ExternalFactor[];
+  risk_signals?: StrategicRisk[];
+  constraint_signals?: StrategicConstraint[];
+  opportunity_signals?: StrategicOpportunity[];
   created_at: string;
 }
 
@@ -161,6 +166,8 @@ export interface StrategicOptionsAnalysis {
   analysis_period: string;
   options: StrategicOption[];
   prioritized_option_ids?: string[];
+  scenarios?: any[];
+  evaluations?: any[];
   created_at: string;
 }
 
@@ -203,6 +210,7 @@ export interface StrategicTarget {
   status?: string;
   confidence?: number;
   target_provenance?: string;
+  evidence_ids?: string[];
 }
 
 export interface StrategicObjective {

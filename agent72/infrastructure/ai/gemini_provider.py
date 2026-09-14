@@ -42,7 +42,7 @@ class GeminiAIProvider(IAIProvider):
         prompt: str,
         system_instruction: Optional[str] = None,
         temperature: float = 0.2,
-        max_tokens: int = 4096,
+        max_tokens: int = 8192,
     ) -> str:
         """Generates completion using Google Gemini generative AI API."""
         if not self.api_key:

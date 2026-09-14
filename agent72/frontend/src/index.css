@@ -1,42 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-navy: #163A63;
+    --color-institutional: #2F6EA6;
+    --color-sky: #E8F4FB;
+    --color-mainbg: #F5F9FC;
+    --color-surface: #FFFFFF;
+    --color-border: #D7E4EE;
+    --color-primarytext: #19324A;
+    --color-mutedtext: #6B7F91;
+    --color-success: #16805C;
+    --color-warning: #B7791F;
+    --color-danger: #C44B55;
+  }
+
   body {
-    @apply font-sans bg-[#f8fafc] text-slate-800 antialiased;
+    @apply font-sans bg-[#F5F9FC] text-[#19324A] antialiased;
+    background-color: #F5F9FC;
+    color: #19324A;
   }
 }
 
-/* Custom scrollbar for Highlights and modals */
+/* Custom scrollbar matching locked border/muted tokens */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #F5F9FC;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #D7E4EE;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #6B7F91;
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-.animate-float {
-  animation: float 3.5s ease-in-out infinite;
-}
 

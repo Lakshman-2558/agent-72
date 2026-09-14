@@ -1,94 +1,207 @@
 import React from 'react';
-import { Target, TrendingUp, Lightbulb, Split, FileCheck } from 'lucide-react';
+import {
+  Database,
+  Target,
+  TrendingUp,
+  Brain,
+  Split,
+  Layers,
+  ListOrdered,
+  FileCheck,
+  CheckSquare,
+  CheckCircle2,
+  AlertCircle,
+  HelpCircle,
+} from 'lucide-react';
+import {
+  CurrentPositionAnalysis,
+  TrajectoryAnalysis,
+  StrategicIntelligenceAnalysis,
+  StrategicOptionsAnalysis,
+  StrategicPlan,
+  ExecutionReview,
+} from '../../api/types';
 
 interface PipelineStagesProps {
   activeTab: string;
   onSelectTab: (tab: string) => void;
+  currentPosition?: CurrentPositionAnalysis | null;
+  trajectory?: TrajectoryAnalysis | null;
+  intelligence?: StrategicIntelligenceAnalysis | null;
+  options?: StrategicOptionsAnalysis | null;
+  plan?: StrategicPlan | null;
+  latestReview?: ExecutionReview | null;
 }
 
-export const PipelineStages: React.FC<PipelineStagesProps> = ({ activeTab, onSelectTab }) => {
-  const stages = [
+type StageStatus = 'available' | 'completed' | 'current' | 'insufficient_evidence';
+
+export const PipelineStages: React.FC<PipelineStagesProps> = ({
+  activeTab,
+  onSelectTab,
+  currentPosition,
+  trajectory,
+  intelligence,
+  options,
+  plan,
+  latestReview,
+}) => {
+  // Determine real stage statuses based on actual backend data
+  const hasEvidence = Boolean(
+    (currentPosition?.key_metrics && currentPosition.key_metrics.length > 0) ||
+    (currentPosition?.metric_assessments && currentPosition.metric_assessments.length > 0)
+  );
+
+  const getStageState = (tabId: string, hasData: boolean, isCompleted: boolean): StageStatus => {
+    if (activeTab === tabId) return 'current';
+    if (isCompleted) return 'completed';
+    if (hasData) return 'available';
+    return 'insufficient_evidence';
+  };
+
+  const stages: {
+    id: string;
+    title: string;
+    targetTab: string;
+    icon: any;
+    status: StageStatus;
+  }[] = [
+    {
+      id: 'evidence',
+      title: 'Evidence',
+      targetTab: 'overview',
+      icon: Database,
+      status: getStageState('overview', hasEvidence, hasEvidence),
+    },
     {
       id: 'position',
-      number: '1',
-      question: 'WHERE ARE WE?',
       title: 'Current Position',
-      subtitle: 'Baseline performance & gaps',
+      targetTab: 'overview',
       icon: Target,
-      targetTab: 'position',
+      status: getStageState('overview', !!currentPosition, !!currentPosition),
     },
     {
       id: 'trajectory',
-      number: '2',
-      question: 'WHERE ARE WE HEADING?',
       title: 'Trajectory',
-      subtitle: 'Direction & momentum',
+      targetTab: 'overview',
       icon: TrendingUp,
-      targetTab: 'trajectory',
+      status: getStageState('overview', !!trajectory, !!trajectory),
     },
     {
       id: 'intelligence',
-      number: '3',
-      question: 'WHAT MATTERS?',
-      title: 'Strategic Intelligence',
-      subtitle: 'Risks, constraints & factors',
-      icon: Lightbulb,
+      title: 'Strategic Intel',
       targetTab: 'intelligence',
+      icon: Brain,
+      status: getStageState('intelligence', !!intelligence, !!intelligence),
     },
     {
       id: 'options',
-      number: '4',
-      question: 'WHAT CAN WE DO?',
-      title: 'Strategic Options',
-      subtitle: 'Choices & 4 scenarios',
-      icon: Split,
+      title: 'Options',
       targetTab: 'options',
+      icon: Split,
+      status: getStageState('options', !!options?.options?.length, !!options?.options?.length),
+    },
+    {
+      id: 'scenarios',
+      title: 'Scenarios',
+      targetTab: 'options',
+      icon: Layers,
+      status: getStageState('options', !!options?.scenarios?.length, !!options?.scenarios?.length),
+    },
+    {
+      id: 'prioritization',
+      title: 'Prioritization',
+      targetTab: 'options',
+      icon: ListOrdered,
+      status: getStageState('options', !!options?.evaluations?.length, !!options?.evaluations?.length),
     },
     {
       id: 'plan',
-      number: '5',
-      question: 'WHAT SHOULD THE PLAN CONTAIN?',
       title: 'Strategic Plan',
-      subtitle: 'Targets, initiatives & review',
-      icon: FileCheck,
       targetTab: 'plan',
+      icon: FileCheck,
+      status: getStageState('plan', !!plan, plan?.status === 'APPROVED' || plan?.status === 'ACTIVE'),
+    },
+    {
+      id: 'review',
+      title: 'Execution Review',
+      targetTab: 'review',
+      icon: CheckSquare,
+      status: getStageState('review', !!latestReview, !!latestReview),
     },
   ];
 
-  return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
-      {stages.map((st) => {
-        const Icon = st.icon;
-        const isActive = activeTab === st.targetTab;
+  const getStatusBadge = (status: StageStatus) => {
+    switch (status) {
+      case 'current':
         return (
-          <button
-            key={st.id}
-            onClick={() => onSelectTab(st.targetTab)}
-            className={`group text-left p-3 rounded-xl border transition-all duration-150 flex flex-col justify-between ${
-              isActive
-                ? 'bg-blue-600 text-white border-blue-600 shadow-sm shadow-blue-500/20'
-                : 'bg-white hover:bg-slate-50 text-slate-700 border-slate-200/90 shadow-xs'
-            }`}
-          >
-            <div className="flex items-center justify-between w-full mb-1.5">
-              <span
-                className={`text-[10px] font-extrabold uppercase tracking-wider ${
-                  isActive ? 'text-blue-100' : 'text-blue-600'
-                }`}
-              >
-                {st.question}
-              </span>
-              <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400 group-hover:text-blue-600'}`} />
-            </div>
-            <div>
-              <div className="text-xs font-bold leading-snug">{st.title}</div>
-              <div className={`text-[11px] truncate ${isActive ? 'text-blue-100' : 'text-slate-400'}`}>
-                {st.subtitle}
-              </div>
-            </div>
-          </button>
+          <span className="text-[9.5px] font-bold px-1.5 py-0.2 rounded bg-white text-[#163A63] border border-[#D7E4EE]">
+            Current
+          </span>
         );
-      })}
+      case 'completed':
+        return (
+          <span className="text-[9.5px] font-bold px-1.5 py-0.2 rounded bg-[#E8F4FB] text-[#16805C] border border-[#A7F3D0] flex items-center gap-0.5">
+            <CheckCircle2 className="w-2.5 h-2.5" />
+            Done
+          </span>
+        );
+      case 'available':
+        return (
+          <span className="text-[9.5px] font-bold px-1.5 py-0.2 rounded bg-[#E8F4FB] text-[#2F6EA6] border border-[#D7E4EE]">
+            Available
+          </span>
+        );
+      case 'insufficient_evidence':
+      default:
+        return (
+          <span className="text-[9.5px] font-medium px-1.5 py-0.2 rounded bg-[#F5F9FC] text-[#6B7F91] border border-[#D7E4EE]">
+            No Data
+          </span>
+        );
+    }
+  };
+
+  return (
+    <div className="bg-white border border-[#D7E4EE] rounded-2xl p-3 shadow-2xs">
+      <div className="flex items-center justify-between pb-2 mb-2 border-b border-[#D7E4EE]">
+        <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#163A63]">
+          Agent 72 Pipeline
+        </span>
+        <span className="text-[10px] text-[#6B7F91] font-medium">
+          Evidence → Current Position → Trajectory → Intelligence → Options → Scenarios → Prioritization → Plan → Review
+        </span>
+      </div>
+
+      <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-9 gap-1.5">
+        {stages.map((st, idx) => {
+          const Icon = st.icon;
+          const isCurrent = st.status === 'current';
+
+          return (
+            <button
+              key={st.id}
+              onClick={() => onSelectTab(st.targetTab)}
+              className={`p-2 rounded-xl border text-left flex flex-col justify-between transition-all ${
+                isCurrent
+                  ? 'bg-[#163A63] text-white border-[#163A63] shadow-xs'
+                  : 'bg-[#F5F9FC] hover:bg-white text-[#19324A] border-[#D7E4EE]'
+              }`}
+            >
+              <div className="flex items-center justify-between w-full mb-1">
+                <span className="text-[10px] font-bold opacity-75">{idx + 1}</span>
+                <Icon className={`w-3.5 h-3.5 ${isCurrent ? 'text-white' : 'text-[#2F6EA6]'}`} />
+              </div>
+              <div className="text-[11px] font-bold truncate leading-tight my-0.5">
+                {st.title}
+              </div>
+              <div className="mt-1">
+                {getStatusBadge(st.status)}
+              </div>
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 };
+

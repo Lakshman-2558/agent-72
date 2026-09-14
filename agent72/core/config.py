@@ -1,6 +1,6 @@
 """Application configuration management using Pydantic Settings."""
 
-from typing import List, Literal, Optional
+from typing import Any, List, Literal, Optional
 from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -45,15 +45,17 @@ class Settings(BaseSettings):
     AI_MODEL_NAME: str = "mock-strategic-v1"
     AI_API_KEY: Optional[str] = None
 
-    # CORS Configuration
-    CORS_ORIGINS: List[str] = [
-        "http://localhost:3000",
-        "http://localhost:5173",
-        "http://localhost:8000",
-        "http://127.0.0.1:3000",
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:8000",
-    ]
+    # CORS Configuration: Loaded dynamically from CORS_ORIGINS in .env or environment
+    CORS_ORIGINS: Any = Field(
+        default_factory=lambda: [
+            "http://localhost:3000",
+            "http://localhost:5173",
+            "http://localhost:8000",
+            "http://127.0.0.1:3000",
+            "http://127.0.0.1:5173",
+            "http://127.0.0.1:8000",
+        ]
+    )
 
     # Pagination Defaults & Limits
     DEFAULT_PAGE_SIZE: int = 50
@@ -151,6 +153,48 @@ class Settings(BaseSettings):
         default=50.0,
         description="Minimum total score for MEDIUM priority option recommendation."
     )
+
+    @field_validator("APP_PORT", mode="before")
+    @classmethod
+    def normalize_port(cls, v: Any) -> int:
+        import os
+        port_env = os.environ.get("PORT")
+        if port_env:
+            try:
+                return int(port_env)
+            except ValueError:
+                pass
+        return int(v) if v else 8000
+
+    @field_validator("AI_API_KEY", mode="before")
+    @classmethod
+    def normalize_api_key(cls, v: Any) -> Optional[str]:
+        import os
+        return v or os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+
+    @field_validator("CORS_ORIGINS", mode="before")
+    @classmethod
+    def normalize_cors_origins(cls, v: Any) -> List[str]:
+        if not v:
+            return ["*"]
+        if isinstance(v, list):
+            return [str(origin).strip() for origin in v if str(origin).strip()]
+        if isinstance(v, str):
+            v = v.strip()
+            if not v or v == "*":
+                return ["*"]
+            if v.startswith("[") and v.endswith("]"):
+                import json
+                try:
+                    parsed = json.loads(v)
+                    if isinstance(parsed, list):
+                        return [str(origin).strip() for origin in parsed if str(origin).strip()]
+                except Exception:
+                    v = v[1:-1]
+            if "," in v:
+                return [o.strip().strip("'\"") for o in v.split(",") if o.strip()]
+            return [v.strip("'\"")]
+        return ["*"]
 
     @field_validator("DATABASE_URL", mode="before")
     @classmethod

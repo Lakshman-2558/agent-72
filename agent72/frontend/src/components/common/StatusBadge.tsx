@@ -8,27 +8,52 @@ interface StatusBadgeProps {
 export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, size = 'md' }) => {
   const normalized = (status || '').toUpperCase().trim();
 
-  let colorClasses = 'bg-slate-100 text-slate-700 border-slate-200';
+  let styleObj = {
+    backgroundColor: '#F5F9FC',
+    color: '#6B7F91',
+    borderColor: '#D7E4EE',
+  };
 
   if (['ON_TRACK', 'IMPROVING', 'ACTIVE', 'APPROVED', 'LOW'].includes(normalized)) {
-    colorClasses = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+    styleObj = {
+      backgroundColor: '#E8F4FB',
+      color: '#16805C',
+      borderColor: '#A7F3D0',
+    };
   } else if (['AT_RISK', 'VOLATILE', 'PENDING_APPROVAL', 'MEDIUM', 'WARNING'].includes(normalized)) {
-    colorClasses = 'bg-amber-50 text-amber-700 border-amber-200';
+    styleObj = {
+      backgroundColor: '#FEF9C3',
+      color: '#B7791F',
+      borderColor: '#FDE68A',
+    };
   } else if (['OFF_TRACK', 'DECLINING', 'CRITICAL', 'HIGH', 'DEFICIT'].includes(normalized)) {
-    colorClasses = 'bg-rose-50 text-rose-700 border-rose-200';
+    styleObj = {
+      backgroundColor: '#FEE2E2',
+      color: '#C44B55',
+      borderColor: '#FECACA',
+    };
   } else if (['INSUFFICIENT_EVIDENCE', 'INSUFFICIENT_DATA', 'UNKNOWN', 'DRAFT', 'STABLE'].includes(normalized)) {
-    colorClasses = 'bg-slate-100 text-slate-700 border-slate-300';
+    styleObj = {
+      backgroundColor: '#F5F9FC',
+      color: '#6B7F91',
+      borderColor: '#D7E4EE',
+    };
   }
 
-  const label = normalized === 'INSUFFICIENT_EVIDENCE'
-    ? 'Insufficient Evidence'
-    : normalized.replace(/_/g, ' ');
+  const label =
+    normalized === 'INSUFFICIENT_EVIDENCE' || normalized === 'INSUFFICIENT_DATA'
+      ? 'Insufficient Evidence'
+      : normalized.replace(/_/g, ' ');
 
-  const sizeClass = size === 'sm' ? 'text-xs px-2 py-0.5' : 'text-xs font-semibold px-2.5 py-1';
+  const sizeClass = size === 'sm' ? 'text-[10.5px] px-2 py-0.5' : 'text-xs font-semibold px-2.5 py-0.5';
 
   return (
-    <span className={`inline-flex items-center rounded-full border ${sizeClass} ${colorClasses}`}>
+    <span
+      style={styleObj}
+      className={`inline-flex items-center font-bold tracking-wide rounded-full border shadow-2xs ${sizeClass}`}
+    >
       {label}
     </span>
   );
 };
+

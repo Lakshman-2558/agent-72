@@ -29,13 +29,30 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         f"[Environment: {settings.ENVIRONMENT}, Database: {'SQLite' if settings.is_sqlite else 'PostgreSQL'}]"
     )
 
-    # In development or testing, ensure base tables exist if migrations have not yet run
-    if settings.ENVIRONMENT in ("development", "testing"):
-        try:
-            Base.metadata.create_all(bind=engine)
-            logger.info("Database schema verified / initialized.")
-        except Exception as e:
-            logger.warning(f"Could not auto-create tables on startup: {e}")
+    # Ensure base tables exist in all environments (SQLite or Postgres)
+    try:
+        Base.metadata.create_all(bind=engine)
+        logger.info("Database schema verified / initialized.")
+        
+        # Auto-seed initial datasets if the database is newly initialized and empty
+        from agent72.infrastructure.database.session import SessionLocal
+        from agent72.infrastructure.database.models import InstitutionModel
+        with SessionLocal() as db:
+            inst_count = db.query(InstitutionModel).count()
+            if inst_count == 0:
+                logger.info("Empty database detected on startup. Auto-seeding initial Vignan's University datasets...")
+                try:
+                    from scripts.seed_demo_trajectory import seed_demo_data
+                    from scripts.seed_multi_period_data import seed_multi_period_data
+                    from scripts.update_to_vignan import update_to_vignan
+                    seed_demo_data()
+                    seed_multi_period_data()
+                    update_to_vignan()
+                    logger.info("Initial institutional dataset seeded successfully.")
+                except Exception as seed_err:
+                    logger.warning(f"Startup auto-seed encountered non-fatal error: {seed_err}")
+    except Exception as e:
+        logger.warning(f"Database initialization check: {e}")
 
     yield
 
@@ -145,10 +162,21 @@ def create_application() -> FastAPI:
         @app.get("/ui", include_in_schema=False)
         @app.get("/ui/{full_path:path}", include_in_schema=False)
         async def serve_ui(full_path: str = ""):
+            if full_path:
+                candidate = frontend_dist_dir / full_path
+                if candidate.is_file():
+                    return FileResponse(str(candidate))
             index_path = frontend_dist_dir / "index.html"
             if index_path.exists():
                 return FileResponse(str(index_path))
             return JSONResponse(status_code=404, content={"message": "Frontend build index.html not found."})
+
+        @app.get("/{image_name}.png", include_in_schema=False)
+        async def serve_root_image(image_name: str):
+            candidate = frontend_dist_dir / f"{image_name}.png"
+            if candidate.is_file():
+                return FileResponse(str(candidate))
+            return JSONResponse(status_code=404, content={"message": "Image not found"})
 
     # Root endpoint for quick redirection
     @app.get("/", include_in_schema=False)
