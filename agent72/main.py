@@ -90,6 +90,7 @@ def create_application() -> FastAPI:
     app.add_middleware(
         CORSMiddleware,
         allow_origins=settings.CORS_ORIGINS,
+        allow_origin_regex=settings.CORS_ORIGIN_REGEX,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
@@ -178,7 +179,11 @@ def create_application() -> FastAPI:
                 return FileResponse(str(candidate))
             return JSONResponse(status_code=404, content={"message": "Image not found"})
 
-    # Root endpoint for quick redirection
+    # Root & health endpoints for quick probes and load balancer health checks
+    @app.get("/health", include_in_schema=False)
+    def health_check():
+        return {"status": "healthy", "service": settings.PROJECT_NAME, "version": settings.VERSION}
+
     @app.get("/", include_in_schema=False)
     def root():
         return {

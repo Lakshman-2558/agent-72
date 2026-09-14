@@ -54,7 +54,13 @@ class Settings(BaseSettings):
             "http://127.0.0.1:3000",
             "http://127.0.0.1:5173",
             "http://127.0.0.1:8000",
+            "https://agent-72-zeta.vercel.app",
+            "https://agent-72.vercel.app",
         ]
+    )
+    CORS_ORIGIN_REGEX: Optional[str] = Field(
+        default=r"^(https?://(localhost|127\.0\.0\.1)(:\d+)?|https://.*\.vercel\.app|https://.*\.onrender\.com)$",
+        description="Regex pattern for allowed CORS origins (e.g. all Vercel and Render preview/production deployments)."
     )
 
     # Pagination Defaults & Limits
