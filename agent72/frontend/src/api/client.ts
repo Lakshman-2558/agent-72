@@ -10,16 +10,57 @@ import {
   AgentQueryResponse,
 } from './types';
 
-const apiBase = import.meta.env.VITE_API_URL
-  ? `${import.meta.env.VITE_API_URL.replace(/\/$/, '')}/api/v1`
-  : '/api/v1';
+// Priority: 1) LocalStorage custom URL, 2) Vite env variable VITE_API_URL, 3) fallback /api/v1
+export function getBackendBaseUrl(): string {
+  if (typeof window !== 'undefined') {
+    const saved = localStorage.getItem('AGENT72_BACKEND_URL');
+    if (saved && saved.trim()) {
+      return `${saved.trim().replace(/\/$/, '')}/api/v1`;
+    }
+  }
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (envUrl && envUrl.trim()) {
+    return `${envUrl.trim().replace(/\/$/, '')}/api/v1`;
+  }
+  return '/api/v1';
+}
+
+export function saveCustomBackendUrl(url: string | null): void {
+  if (typeof window !== 'undefined') {
+    if (url && url.trim()) {
+      localStorage.setItem('AGENT72_BACKEND_URL', url.trim());
+    } else {
+      localStorage.removeItem('AGENT72_BACKEND_URL');
+    }
+    apiClient.defaults.baseURL = getBackendBaseUrl();
+  }
+}
 
 export const apiClient = axios.create({
-  baseURL: apiBase,
+  baseURL: getBackendBaseUrl(),
   headers: {
     'Content-Type': 'application/json',
   },
+  timeout: 45000, // 45s to accommodate Render free tier cold starts
 });
+
+// Response interceptor to detect HTML fallback responses from Vercel SPA rewrites
+apiClient.interceptors.response.use(
+  (response) => {
+    if (
+      typeof response.data === 'string' &&
+      (response.data.includes('<!doctype html') || response.data.includes('<html'))
+    ) {
+      return Promise.reject(
+        new Error(
+          'Received HTML instead of JSON. Your frontend is attempting to call itself rather than your Render backend. Please set your Render backend URL.'
+        )
+      );
+    }
+    return response;
+  },
+  (error) => Promise.reject(error)
+);
 
 export const api = {
   // Organizations

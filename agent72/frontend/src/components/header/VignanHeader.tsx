@@ -15,6 +15,7 @@ interface VignanHeaderProps {
   isConnected?: boolean;
   onRefresh?: () => void;
   onOpenAskAgent?: () => void;
+  onOpenBackendSettings?: () => void;
   activeTab?: string;
 }
 
@@ -27,6 +28,7 @@ export const VignanHeader: React.FC<VignanHeaderProps> = ({
   isConnected = true,
   onRefresh,
   onOpenAskAgent,
+  onOpenBackendSettings,
   activeTab,
 }) => {
   const periods = ['2024-2025', '2025-2026', '2026-2027', '2023-2024'];
@@ -108,13 +110,20 @@ export const VignanHeader: React.FC<VignanHeaderProps> = ({
               </button>
             )}
 
-            {/* Online Status */}
-            <div className="hidden sm:flex items-center gap-1 text-[10px] font-semibold px-2 py-1 rounded-lg border border-[#D7E4EE] bg-[#F5F9FC]">
-              <Radio className={`w-2.5 h-2.5 ${isConnected ? 'text-[#16805C]' : 'text-[#6B7F91]'}`} />
-              <span className={isConnected ? 'text-[#16805C]' : 'text-[#6B7F91]'}>
-                {isConnected ? 'Online' : 'Offline'}
-              </span>
-            </div>
+            {/* Online/Backend Status */}
+            <button
+              onClick={onOpenBackendSettings}
+              type="button"
+              className={`flex items-center gap-1.5 text-[10px] font-semibold px-2.5 py-1 rounded-lg border transition-all cursor-pointer ${
+                isConnected
+                  ? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+                  : 'border-amber-300 bg-amber-50 text-amber-800 hover:bg-amber-100 animate-pulse'
+              }`}
+              title="Click to configure or test Backend API URL"
+            >
+              <Radio className={`w-2.5 h-2.5 ${isConnected ? 'text-emerald-600' : 'text-amber-600'}`} />
+              <span>{isConnected ? 'API Connected' : 'Connect Backend'}</span>
+            </button>
 
             {/* Special, Unique & Innovative "Ask Agent 72" Header Button */}
             {onOpenAskAgent && (

@@ -23,6 +23,7 @@ import { StrategicPlanView } from './components/plan/StrategicPlanView';
 import { ExecutionReviewView } from './components/review/ExecutionReviewView';
 import { AskAgent72View } from './components/chat/AskAgent72View';
 import { FloatingAgentBeacon } from './components/chat/FloatingAgentBeacon';
+import { BackendSettingsModal } from './components/common/BackendSettingsModal';
 
 import { LoadingState } from './components/common/LoadingState';
 import { ErrorState } from './components/common/ErrorState';
@@ -36,6 +37,7 @@ export const App: React.FC = () => {
   const [selectedPeriod, setSelectedPeriod] = useState<string>('2024-2025');
   const [activeTab, setActiveTab] = useState<string>('overview');
   const [isConnected, setIsConnected] = useState<boolean>(true);
+  const [isBackendModalOpen, setIsBackendModalOpen] = useState<boolean>(false);
 
   // Backend Snapshots
   const [currentPosition, setCurrentPosition] = useState<CurrentPositionAnalysis | null>(null);
@@ -49,32 +51,39 @@ export const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // 1. Initial Load: Institutions
-  useEffect(() => {
-    const fetchInstitutions = async () => {
-      try {
-        const list = await api.getInstitutions();
-        setInstitutions(list);
-        if (list.length > 0) {
-          // Prefer Vignan's University with Phase 8 data or primary demo institution
-          const preferred =
-            list.find((i) => i.code === 'DEMO-VIGNAN-P8') ||
-            list.find((i) => i.code === 'DEMO-VIGNAN') ||
-            list.find((i) => i.code === 'VIGNAN-P8') ||
-            list.find((i) => i.name.toLowerCase().includes('vignan')) ||
-            list[0];
-          setSelectedInstitutionId(preferred ? preferred.id : list[0].id);
-        } else {
-          setIsLoading(false);
-        }
-      } catch (err) {
-        console.error('Failed to load institutions:', err);
-        setError('Unable to load registered institutions. Ensure the Agent 72 backend is online.');
+  const fetchInstitutions = useCallback(async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const list = await api.getInstitutions();
+      setInstitutions(list);
+      if (list.length > 0) {
+        setIsConnected(true);
+        // Prefer Vignan's University with Phase 8 data or primary demo institution
+        const preferred =
+          list.find((i) => i.code === 'DEMO-VIGNAN-P8') ||
+          list.find((i) => i.code === 'DEMO-VIGNAN') ||
+          list.find((i) => i.code === 'VIGNAN-P8') ||
+          list.find((i) => i.name.toLowerCase().includes('vignan')) ||
+          list[0];
+        setSelectedInstitutionId(preferred ? preferred.id : list[0].id);
+      } else {
         setIsConnected(false);
-        setIsLoading(false);
       }
-    };
-    fetchInstitutions();
+    } catch (err: any) {
+      console.error('Failed to load institutions:', err);
+      setError(
+        'Unable to reach the Agent 72 backend API. If deployed on Vercel, please connect your live Render backend URL.'
+      );
+      setIsConnected(false);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchInstitutions();
+  }, [fetchInstitutions]);
 
   // 2. Fetch all analytical snapshots for institution & period
   const fetchAllSnapshots = useCallback(async () => {
@@ -179,7 +188,33 @@ export const App: React.FC = () => {
   // Tab View Dispatcher
   const renderActiveView = () => {
     if (error) {
-      return <ErrorState message={error} onRetry={fetchAllSnapshots} />;
+      return (
+        <div className="bg-white rounded-2xl border border-rose-200 shadow-sm p-8 text-center max-w-xl mx-auto my-8">
+          <div className="w-12 h-12 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <h3 className="text-base font-bold text-slate-800 mb-2">Backend Connection Required</h3>
+          <p className="text-xs text-slate-600 mb-6 leading-relaxed">
+            {error}
+          </p>
+          <div className="flex items-center justify-center gap-3">
+            <button
+              onClick={() => setIsBackendModalOpen(true)}
+              className="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold rounded-xl shadow transition cursor-pointer"
+            >
+              Configure Backend URL
+            </button>
+            <button
+              onClick={() => fetchInstitutions()}
+              className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition cursor-pointer"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      );
     }
 
     if (isLoading) {
@@ -188,10 +223,31 @@ export const App: React.FC = () => {
 
     if (institutions.length === 0) {
       return (
-        <EmptyState
-          title="No Registered Institutions Found"
-          description="The database currently has no registered institutional records. Ensure the Agent 72 backend and database are initialized."
-        />
+        <div className="bg-white rounded-2xl border border-amber-200 shadow-sm p-8 text-center max-w-xl mx-auto my-8">
+          <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 className="text-base font-bold text-slate-800 mb-2">No Institutional Data Loaded</h3>
+          <p className="text-xs text-slate-600 mb-6 leading-relaxed">
+            The frontend is live, but hasn't received data from the Agent 72 backend. Connect your live Render backend URL or test the connection to view Vignan's University datasets.
+          </p>
+          <div className="flex items-center justify-center gap-3">
+            <button
+              onClick={() => setIsBackendModalOpen(true)}
+              className="px-5 py-2.5 bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold rounded-xl shadow transition cursor-pointer"
+            >
+              Connect Render Backend
+            </button>
+            <button
+              onClick={() => fetchInstitutions()}
+              className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition cursor-pointer"
+            >
+              Refresh
+            </button>
+          </div>
+        </div>
       );
     }
 
@@ -252,6 +308,7 @@ export const App: React.FC = () => {
         isConnected={isConnected}
         onRefresh={fetchAllSnapshots}
         onOpenAskAgent={() => setActiveTab('ask')}
+        onOpenBackendSettings={() => setIsBackendModalOpen(true)}
         activeTab={activeTab}
       />
 
@@ -293,6 +350,15 @@ export const App: React.FC = () => {
       <FloatingAgentBeacon
         activeTab={activeTab}
         onOpenAskAgent={() => setActiveTab('ask')}
+      />
+
+      {/* Backend API Connection & Settings Modal */}
+      <BackendSettingsModal
+        isOpen={isBackendModalOpen}
+        onClose={() => setIsBackendModalOpen(false)}
+        onSaved={() => {
+          fetchInstitutions();
+        }}
       />
     </div>
   );
