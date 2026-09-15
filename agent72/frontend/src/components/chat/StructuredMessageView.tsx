@@ -46,13 +46,20 @@ export const StructuredMessageView: React.FC<StructuredMessageViewProps> = ({ co
     elements.push(
       <div
         key={key}
-        className="my-3 overflow-x-auto rounded-xl border border-slate-200 shadow-2xs bg-white"
+        className="my-2.5 sm:my-3 overflow-x-auto rounded-lg sm:rounded-xl border border-slate-200 shadow-2xs bg-white max-w-full touch-pan-x -mx-1 sm:mx-0"
+        style={{ WebkitOverflowScrolling: 'touch' }}
       >
-        <table className="min-w-full text-left text-xs border-collapse">
+        {headers.length > 3 && (
+          <div className="sm:hidden text-[9.5px] text-slate-400 px-2.5 pt-1.5 font-medium flex items-center justify-between select-none">
+            <span>Table data</span>
+            <span className="text-inst-blue font-semibold">Swipe horizontally &rarr;</span>
+          </div>
+        )}
+        <table className="min-w-full text-left text-[11px] sm:text-xs border-collapse">
           <thead className="bg-slate-100/90 text-slate-700 font-semibold border-b border-slate-200">
             <tr>
               {headers.map((h, hIdx) => (
-                <th key={hIdx} className="px-3 py-2 whitespace-nowrap">
+                <th key={hIdx} className="px-2.5 py-1.5 sm:px-3 sm:py-2 whitespace-nowrap">
                   {renderInlineMarkdown(h)}
                 </th>
               ))}
@@ -62,7 +69,7 @@ export const StructuredMessageView: React.FC<StructuredMessageViewProps> = ({ co
             {rows.map((row, rIdx) => (
               <tr key={rIdx} className={rIdx % 2 === 1 ? 'bg-slate-50/50' : 'bg-white'}>
                 {row.map((cell, cIdx) => (
-                  <td key={cIdx} className="px-3 py-2 leading-snug">
+                  <td key={cIdx} className="px-2.5 py-1.5 sm:px-3 sm:py-2 leading-snug whitespace-normal break-words">
                     {renderInlineMarkdown(cell)}
                   </td>
                 ))}
@@ -92,7 +99,7 @@ export const StructuredMessageView: React.FC<StructuredMessageViewProps> = ({ co
     }
 
     if (!trimmed) {
-      elements.push(<div key={`spacer-${index}`} className="h-1.5" />);
+      elements.push(<div key={`spacer-${index}`} className="h-1 sm:h-1.5" />);
       return;
     }
 
@@ -101,7 +108,7 @@ export const StructuredMessageView: React.FC<StructuredMessageViewProps> = ({ co
       elements.push(
         <h3
           key={`h2-${index}`}
-          className="text-sm sm:text-base font-bold text-slate-800 pt-2 pb-1 border-b border-slate-200 flex items-center gap-1.5"
+          className="text-xs sm:text-base font-bold text-slate-800 pt-2 pb-1 border-b border-slate-200 flex items-center gap-1.5 break-words"
         >
           {renderInlineMarkdown(trimmed.replace('## ', ''))}
         </h3>
@@ -113,7 +120,7 @@ export const StructuredMessageView: React.FC<StructuredMessageViewProps> = ({ co
       elements.push(
         <h4
           key={`h3-${index}`}
-          className="text-xs sm:text-sm font-bold text-blue-900 pt-2 pb-0.5"
+          className="text-[11.5px] sm:text-sm font-bold text-blue-900 pt-2 pb-0.5 break-words"
         >
           {renderInlineMarkdown(trimmed.replace('### ', ''))}
         </h4>
@@ -124,9 +131,9 @@ export const StructuredMessageView: React.FC<StructuredMessageViewProps> = ({ co
     // Bullets
     if (trimmed.startsWith('• ') || trimmed.startsWith('- ')) {
       elements.push(
-        <div key={`bullet-${index}`} className="flex items-start gap-1.5 pl-1 py-0.5 text-xs text-slate-700">
+        <div key={`bullet-${index}`} className="flex items-start gap-1.5 pl-0.5 sm:pl-1 py-0.5 text-xs text-slate-700 break-words">
           <span className="text-blue-500 font-bold shrink-0 mt-0.5">•</span>
-          <div className="flex-1 leading-relaxed">
+          <div className="flex-1 leading-relaxed break-words min-w-0">
             {renderInlineMarkdown(trimmed.slice(2))}
           </div>
         </div>
@@ -136,7 +143,7 @@ export const StructuredMessageView: React.FC<StructuredMessageViewProps> = ({ co
 
     // Regular line
     elements.push(
-      <div key={`p-${index}`} className="py-0.5 leading-relaxed">
+      <div key={`p-${index}`} className="py-0.5 leading-relaxed break-words">
         {renderInlineMarkdown(line)}
       </div>
     );
@@ -146,7 +153,7 @@ export const StructuredMessageView: React.FC<StructuredMessageViewProps> = ({ co
     flushTable(`tbl-final`);
   }
 
-  return <div className="space-y-1">{elements}</div>;
+  return <div className="space-y-1 overflow-hidden">{elements}</div>;
 };
 
 // Inline markdown formatting (bold, code, italics)

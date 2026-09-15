@@ -38,7 +38,7 @@ export const VignanHeader: React.FC<VignanHeaderProps> = ({
           <img
             src={vignanHeaderLogo}
             alt="Vignan's Foundation for Science, Technology & Research"
-            className="h-8 sm:h-9 md:h-10 w-auto object-contain shrink-0"
+            className="h-10 sm:h-11 md:h-12 w-auto object-contain shrink-0"
           />
         </div>
 
@@ -89,11 +89,10 @@ export const VignanHeader: React.FC<VignanHeaderProps> = ({
 
           {/* Agent Status Badge: Does not expose backend URL */}
           <div
-            className={`flex items-center gap-2 text-[11px] font-bold px-3 py-1 rounded-lg border select-none transition-all ${
-              isConnected
-                ? 'border-emerald-300 bg-emerald-50 text-emerald-800 shadow-2xs'
-                : 'border-rose-300 bg-rose-50 text-rose-800 shadow-2xs animate-pulse'
-            }`}
+            className={`flex items-center gap-2 text-[11px] font-bold px-3 py-1 rounded-lg border select-none transition-all ${isConnected
+              ? 'border-emerald-300 bg-emerald-50 text-emerald-800 shadow-2xs'
+              : 'border-rose-300 bg-rose-50 text-rose-800 shadow-2xs animate-pulse'
+              }`}
             title={isConnected ? 'Agent 72 Status: Active & Operational' : 'Agent 72 Status: Inactive'}
           >
             <span className="relative flex h-2.5 w-2.5">

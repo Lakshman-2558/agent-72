@@ -167,8 +167,8 @@ export const PipelineStages: React.FC<PipelineStagesProps> = ({
         <span className="text-[11px] font-extrabold uppercase tracking-wider text-[#163A63]">
           Agent 72 Pipeline
         </span>
-        <span className="text-[10px] text-[#6B7F91] font-medium">
-          Evidence → Current Position → Trajectory → Intelligence → Options → Scenarios → Prioritization → Plan → Review
+        <span className="hidden sm:block text-[10px] text-[#6B7F91] font-medium truncate ml-2">
+          Evidence → Position → Trajectory → Intel → Options → Scenarios → Priorities → Plan → Review
         </span>
       </div>
 

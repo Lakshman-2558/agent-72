@@ -326,14 +326,18 @@ export const App: React.FC = () => {
       />
 
       {/* Main Strategic Dashboard: Desktop 68% / 32% Layout (Full 100% width for Ask Agent 72) */}
-      <main className="flex-1 max-w-[1600px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <main className="flex-1 max-w-[1600px] mx-auto w-full px-2.5 sm:px-6 lg:px-8 py-3 sm:py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 items-start">
           {/* Primary Workspace (12 cols on Ask Agent 72 for maximum chatbox width; 8 cols on other tabs) */}
-          <div className={`${isAskTab ? 'lg:col-span-12' : 'lg:col-span-8'} space-y-6`}>
-            <AgentHero />
-            <PipelineStages activeTab={activeTab} onSelectTab={setActiveTab} />
+          <div className={`${isAskTab ? 'lg:col-span-12' : 'lg:col-span-8'} space-y-3 sm:space-y-6 min-w-0`}>
+            <div className={isAskTab ? 'hidden sm:block' : ''}>
+              <AgentHero />
+            </div>
+            <div className={isAskTab ? 'hidden sm:block' : ''}>
+              <PipelineStages activeTab={activeTab} onSelectTab={setActiveTab} />
+            </div>
             <WorkspaceTabs activeTab={activeTab} onSelectTab={setActiveTab} />
-            <div className="pt-1">
+            <div className="pt-1 min-w-0">
               <ErrorBoundary fallbackTitle="Strategic Workspace Error">
                 <div key={activeTab} className="animate-fade-slide-up">
                   {renderActiveView()}

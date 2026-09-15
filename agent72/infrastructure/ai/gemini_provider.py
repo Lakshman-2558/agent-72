@@ -69,7 +69,12 @@ class GeminiAIProvider(IAIProvider):
                     self.model_name = m_name
                     return response.text.strip()
             except Exception as e:
+                err_str = str(e).lower()
                 logger.warning(f"Gemini model {m_name} failed: {e}. Trying fallback...")
+                # If quota is exhausted (HTTP 429), retrying more models on the same project key only adds 30-40s delay. Fail fast!
+                if "429" in err_str or "quota" in err_str or "resourceexhausted" in err_str:
+                    logger.warning("Gemini rate limit / quota reached. Failing fast to grounded template synthesis.")
+                    break
 
         return "Gemini API error: unable to generate completion with available models."
 
