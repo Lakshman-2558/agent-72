@@ -51,6 +51,29 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
                     logger.info("Initial institutional dataset seeded successfully.")
                 except Exception as seed_err:
                     logger.warning(f"Startup auto-seed encountered non-fatal error: {seed_err}")
+
+            # Auto-seed Strategic Plans and Execution Reviews if missing
+            from agent72.infrastructure.database.models import StrategicPlanModel
+            plan_count = db.query(StrategicPlanModel).count()
+            if plan_count == 0:
+                logger.info("No strategic plans detected on startup. Auto-seeding Phase 8 Strategic Plans & Execution Reviews...")
+                try:
+                    from scripts.seed_demo_strategic_plan import run_phase8_demo
+                    from scripts.update_to_vignan import update_to_vignan
+                    from scripts.replicate_active_plan_to_all_vignan import replicate
+                    run_phase8_demo()
+                    update_to_vignan()
+                    replicate()
+                    logger.info("Phase 8 Strategic Plans & Execution Reviews auto-seeded successfully.")
+                except Exception as plan_err:
+                    logger.warning(f"Strategic plan startup auto-seed error: {plan_err}")
+            else:
+                # Ensure all institutions have replicated active plans
+                try:
+                    from scripts.replicate_active_plan_to_all_vignan import replicate
+                    replicate()
+                except Exception:
+                    pass
     except Exception as e:
         logger.warning(f"Database initialization check: {e}")
 

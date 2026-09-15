@@ -123,12 +123,25 @@ export const App: React.FC = () => {
         if (fallbackOpt.length > 0) opt = fallbackOpt[0];
       }
 
+      // If selected institution has no direct plan, fallback to any active institutional plan
+      let effectivePlans = planList;
+      if (effectivePlans.length === 0) {
+        try {
+          const allPlans = await api.getPlans();
+          if (allPlans.length > 0) {
+            effectivePlans = allPlans;
+          }
+        } catch {
+          // ignore
+        }
+      }
+
       // Find plan with active execution review if available
       let pl: StrategicPlan | null = null;
       let rev: ExecutionReview | null = null;
 
-      const activePlans = planList.filter((p) => p.status === 'ACTIVE');
-      const candidatePlans = activePlans.length > 0 ? activePlans : planList;
+      const activePlans = effectivePlans.filter((p) => p.status === 'ACTIVE');
+      const candidatePlans = activePlans.length > 0 ? activePlans : effectivePlans;
 
       for (const candidatePlan of candidatePlans) {
         try {
@@ -147,13 +160,13 @@ export const App: React.FC = () => {
         }
       }
 
-      if (!pl && planList.length > 0) {
-        pl = candidatePlans[0] || planList[0];
+      if (!pl && effectivePlans.length > 0) {
+        pl = candidatePlans[0] || effectivePlans[0];
       }
 
       // If pl exists but no review found for it, check if any other plan has a review
       if (pl && !rev) {
-        for (const otherPlan of planList) {
+        for (const otherPlan of effectivePlans) {
           try {
             const fetchedRev = await api.getLatestExecutionReview(otherPlan.id);
             if (fetchedRev) {
@@ -322,7 +335,9 @@ export const App: React.FC = () => {
             <WorkspaceTabs activeTab={activeTab} onSelectTab={setActiveTab} />
             <div className="pt-1">
               <ErrorBoundary fallbackTitle="Strategic Workspace Error">
-                {renderActiveView()}
+                <div key={activeTab} className="animate-fade-slide-up">
+                  {renderActiveView()}
+                </div>
               </ErrorBoundary>
             </div>
           </div>

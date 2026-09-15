@@ -97,8 +97,8 @@ export const BackendSettingsModal: React.FC<BackendSettingsModalProps> = ({
               </svg>
             </div>
             <div>
-              <h3 className="font-bold text-lg leading-tight">Backend API Connection</h3>
-              <p className="text-xs text-brand-200">Connect frontend to your live Render backend</p>
+              <h3 className="font-bold text-lg leading-tight">Agent 72 Connection</h3>
+              <p className="text-xs text-brand-200">Verify Agent 72 active service and connectivity</p>
             </div>
           </div>
           <button
@@ -114,7 +114,7 @@ export const BackendSettingsModal: React.FC<BackendSettingsModalProps> = ({
         <div className="p-6 space-y-4">
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">
-              Backend Service URL
+              Agent Service URL
             </label>
             <div className="relative">
               <input

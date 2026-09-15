@@ -169,7 +169,7 @@ export const AskAgent72View: React.FC<AskAgent72ViewProps> = ({ institutionId, p
               <div className="flex items-center gap-1.5 mb-1 text-[11px] text-muted font-medium">
                 {m.sender === 'agent' ? (
                   <>
-                    <div className="w-6 h-6 rounded-md overflow-hidden border border-[#D7E4EE] bg-white p-0.5 flex items-center justify-center shrink-0 shadow-2xs">
+                    <div className="w-10 h-10 rounded-xl overflow-hidden border border-[#D7E4EE] bg-white p-1 flex items-center justify-center shrink-0 shadow-xs">
                       <img src={agent72Robot} alt="Agent 72" className="w-full h-full object-contain" />
                     </div>
                     <span className="font-bold text-navy">Agent 72</span>

@@ -1,8 +1,9 @@
 import React from 'react';
+import agent72Robot from '../../assets/agent72-robot.png';
 
 export const RobotConstellationStage: React.FC = () => {
   return (
-    <div className="relative w-full h-64 sm:h-72 rounded-2xl bg-gradient-to-b from-[#e0f2fe] via-[#dbeafe] to-[#bfdbfe] border border-blue-200/80 shadow-xs overflow-hidden flex items-center justify-center select-none">
+    <div className="relative w-full h-80 sm:h-96 rounded-2xl bg-gradient-to-b from-[#e0f2fe] via-[#dbeafe] to-[#bfdbfe] border border-blue-200/80 shadow-xs overflow-hidden flex items-center justify-center select-none">
       {/* Constellation / Network Background SVG */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none opacity-45"
@@ -38,14 +39,14 @@ export const RobotConstellationStage: React.FC = () => {
       </svg>
 
       {/* Floating Center Glow */}
-      <div className="absolute w-52 h-52 bg-white/40 rounded-full blur-2xl pointer-events-none" />
+      <div className="absolute w-72 h-72 bg-white/50 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Robot Character standing and gently floating */}
+      {/* Robot Character standing and gently floating (Extra Large) */}
       <div className="relative z-10 flex flex-col items-center justify-center">
         <img
-          src="/agent72-robot.png"
+          src={agent72Robot}
           alt="Agent 72 - Institutional Strategic Planning Assistant"
-          className="w-40 h-40 sm:w-48 sm:h-48 object-contain animate-float drop-shadow-lg"
+          className="w-56 h-56 sm:w-68 sm:h-68 md:w-76 md:h-76 object-contain animate-float drop-shadow-2xl"
         />
       </div>
     </div>
